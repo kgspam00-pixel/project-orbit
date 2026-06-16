@@ -11,7 +11,6 @@ const reunionDate = new Date("2025-06-18T14:00:00");
 // ======================
 
 const subtitleMessages = [
-  "Butterfly patience remaining...",
   "Orbit holding steady...",
   "Awaiting planetary reunion...",
   "Missing Aman...",
@@ -170,7 +169,7 @@ const amanMessages = [
 
   "Mission note: Khushi is proud of you",
 
-  "Energy source: making Khushi happy"
+  "Energy source: ragebaiting Khushi"
 ];
 
 document
