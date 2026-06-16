@@ -1,1 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Orbit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<div id="stars"></div>
+
+<div class="app">
+
+  <section id="home" class="view active">
+
+    <h1>PROJECT ORBIT</h1>
+
+    <div class="orbit-container">
+
+      <div class="planet" id="amanPlanet">
+        Aman
+      </div>
+
+      <div class="orbit">
+        <div class="moon" id="khushiMoon">
+          Khushi
+        </div>
+      </div>
+
+      <div id="popup"></div>
+
+    </div>
+
+    <div class="status-card">
+      <p>Subject</p>
+      <h2>Aman</h2>
+
+      <p>Status</p>
+      <h2>Away</h2>
+
+      <p>Estimated Time Until Aman Recovery</p>
+      <h2 id="countdown"></h2>
+    </div>
+
+    <div class="menu">
+      <button onclick="openView('diagnostics')">Diagnostics</button>
+      <button onclick="openView('locate')">Locate Khushi</button>
+      <button onclick="openView('orbitStatus')">Orbit Status</button>
+      <button onclick="openView('transmissions')">Transmissions</button>
+    </div>
+
+  </section>
+
+  <section id="diagnostics" class="view panel">
+    <button class="back" onclick="goHome()">← Back</button>
+
+    <h2>Diagnostics</h2>
+
+    <button onclick="runDiagnostic()">Run Diagnostic</button>
+
+    <div class="output" id="diagnosticOutput"></div>
+  </section>
+
+  <section id="locate" class="view panel">
+    <button class="back" onclick="goHome()">← Back</button>
+
+    <h2>Locate Khushi</h2>
+
+    <button onclick="locateKhushi()">Locate</button>
+
+    <div class="output" id="locateOutput"></div>
+  </section>
+
+  <section id="orbitStatus" class="view panel">
+    <button class="back" onclick="goHome()">← Back</button>
+
+    <h2>Orbit Status</h2>
+
+    <button onclick="showOrbitStatus()">Generate Report</button>
+
+    <div class="output" id="orbitOutput"></div>
+  </section>
+
+  <section id="transmissions" class="view panel">
+    <button class="back" onclick="goHome()">← Back</button>
+
+    <h2>Transmissions</h2>
+
+    <button onclick="nextTransmission()">Receive Transmission</button>
+
+    <div class="output" id="transmissionOutput"></div>
+  </section>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
