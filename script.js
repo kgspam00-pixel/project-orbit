@@ -1,178 +1,462 @@
-const reunionDate = new Date("2026-06-18T14:00:00");
+```javascript
+// ======================
+// PROJECT ORBIT
+// ======================
 
-function updateCountdown(){
+// CHANGE IF NEEDED
+const reunionDate = new Date("2025-06-18T14:00:00");
+
+// ======================
+// COUNTDOWN
+// ======================
+
+const subtitleMessages = [
+  "Butterfly patience remaining...",
+  "Orbit holding steady...",
+  "Awaiting planetary reunion...",
+  "Missing Aman...",
+  "Counting down...",
+  "Return vector locked...",
+  "Preparing welcome protocol..."
+];
+
+let subtitleIndex = 0;
+
+function rotateSubtitle() {
+  const el = document.getElementById("countdownSubtext");
+  if (!el) return;
+
+  subtitleIndex =
+    (subtitleIndex + 1) % subtitleMessages.length;
+
+  el.textContent =
+    subtitleMessages[subtitleIndex];
+}
+
+setInterval(rotateSubtitle, 8000);
+
+function updateCountdown() {
+
+  const countdown =
+    document.getElementById("countdown");
 
   const now = new Date();
+
   const diff = reunionDate - now;
 
-  if(diff <= 0){
-    document.getElementById("countdown").innerHTML =
+  if (diff <= 0) {
+
+    countdown.innerHTML =
       "MISSION COMPLETE";
+
+    const sub =
+      document.getElementById("countdownSubtext");
+
+    if (sub) {
+      sub.textContent =
+        "Aman recovery successful.";
+    }
+
     return;
   }
 
-  const d = Math.floor(diff/(1000*60*60*24));
-  const h = Math.floor(diff/(1000*60*60))%24;
-  const m = Math.floor(diff/(1000*60))%60;
-  const s = Math.floor(diff/1000)%60;
+  const d =
+    Math.floor(diff / (1000 * 60 * 60 * 24));
 
-  document.getElementById("countdown").innerHTML =
+  const h =
+    Math.floor(diff / (1000 * 60 * 60)) % 24;
+
+  const m =
+    Math.floor(diff / (1000 * 60)) % 60;
+
+  const s =
+    Math.floor(diff / 1000) % 60;
+
+  countdown.innerHTML =
     `${d}d ${h}h ${m}m ${s}s`;
 }
 
-setInterval(updateCountdown,1000);
 updateCountdown();
+setInterval(updateCountdown, 1000);
 
-function openView(id){
+// ======================
+// NAVIGATION
+// ======================
+
+function openView(id) {
+
   document
     .querySelectorAll(".view")
-    .forEach(v=>v.classList.remove("active"));
+    .forEach(view =>
+      view.classList.remove("active")
+    );
 
   document
     .getElementById(id)
     .classList.add("active");
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 }
 
-function goHome(){
+function goHome() {
+
   document
     .querySelectorAll(".view")
-    .forEach(v=>v.classList.remove("active"));
+    .forEach(view =>
+      view.classList.remove("active")
+    );
 
   document
     .getElementById("home")
     .classList.add("active");
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 }
 
-const amanMessages = [
-"Handsome levels: abnormally high",
-"Boyfriend rating: 11/10",
-"Warning: highly lovable",
-"Current role: responsible son",
-"Planet classification: my favorite",
-"Smile effectiveness: dangerous",
-"Known side effect: causes butterflies",
-"Currently being missed"
-];
+// ======================
+// POPUPS
+// ======================
 
-const khushiMessages = [
-"orbit stable: still in love",
-"i miss you, jaan",
-"awaiting planetary reunion",
-"trajectory locked on aman",
-"my universe revolves around you",
-"distance: unacceptable",
-"still waiting for my favorite person",
-"i'm really proud of you",
-"thank you for taking care of everyone"
-];
+function popup(message) {
 
-function popup(msg){
+  const box =
+    document.getElementById("popup");
 
-  const box = document.getElementById("popup");
-
-  box.innerText = msg;
+  box.textContent = message;
   box.style.display = "block";
 
   clearTimeout(window.popupTimer);
 
-  window.popupTimer = setTimeout(()=>{
+  window.popupTimer = setTimeout(() => {
     box.style.display = "none";
-  },3000);
+  }, 3200);
 }
 
-document
-.getElementById("amanPlanet")
-.addEventListener("click",()=>{
-  popup(
-    amanMessages[
-      Math.floor(Math.random()*amanMessages.length)
-    ]
-  );
-});
+// ======================
+// AMAN
+// ======================
+
+const amanMessages = [
+
+  "SCAN COMPLETE • Beautiful human detected",
+
+  "Handsome levels: abnormally high",
+
+  "Current role: Responsible Son",
+
+  "Known side effect: causes butterflies",
+
+  "Planet classification: my favorite",
+
+  "Current status: deeply appreciated",
+
+  "Warning: highly lovable",
+
+  "Khushi's rating: 11/10",
+
+  "Reliability score: exceptional",
+
+  "Smile effectiveness: dangerous",
+
+  "Orbit center confirmed",
+
+  "Currently being missed",
+
+  "Mission note: Khushi is proud of you",
+
+  "Energy source: making Khushi happy"
+];
 
 document
-.getElementById("khushiMoon")
-.addEventListener("click",()=>{
-  popup(
-    khushiMessages[
-      Math.floor(Math.random()*khushiMessages.length)
-    ]
-  );
-});
+  .getElementById("amanPlanet")
+  .addEventListener("click", () => {
+
+    popup(
+      amanMessages[
+        Math.floor(
+          Math.random() *
+          amanMessages.length
+        )
+      ]
+    );
+  });
+
+// ======================
+// KHUSHI
+// ======================
+
+const khushiMessages = [
+
+  "orbit stable: still in love",
+
+  "trajectory locked on Aman",
+
+  "awaiting planetary reunion",
+
+  "distance: unacceptable",
+
+  "i miss you, jaan",
+
+  "i'm proud of you",
+
+  "thank you for taking care of everyone",
+
+  "butterfly remains gravitationally attached",
+
+  "my universe revolves around you",
+
+  "return vector requested",
+
+  "you are my favorite orbit",
+
+  "love levels: ridiculous",
+
+  "still waiting for my favorite person",
+
+  "come back soon, beautiful",
+
+  "orbit status: missing Aman"
+];
+
+document
+  .getElementById("khushiMoon")
+  .addEventListener("click", () => {
+
+    popup(
+      khushiMessages[
+        Math.floor(
+          Math.random() *
+          khushiMessages.length
+        )
+      ]
+    );
+  });
+
+// ======================
+// DIAGNOSTICS
+// ======================
 
 const diagnostics = [
-`Kindness: PASS
-Reliability: PASS
-Return Speed: FAIL`,
 
-`Responsible Son Protocol
-Working As Intended`,
+`AMAN DIAGNOSTIC REPORT
 
-`Issue Detected
+Kindness ........ PASS
+Reliability ..... PASS
+Handsome ........ PASS
+Return Speed .... FAIL`,
 
-Khushi misses Aman`,
+`RESPONSIBLE SON PROTOCOL
 
-`Aman Scan Complete
+Status:
+Working as intended.`,
 
-Status: Wonderful`
+`ISSUE DETECTED
+
+Khushi misses Aman.`,
+
+`SCAN COMPLETE
+
+No anomalies detected.
+
+Subject remains wonderful.`,
+
+`EMERGENCY REPORT
+
+Boyfriend currently too far away.`,
+
+`MISSION ANALYSIS
+
+Aman is doing a good job.
+Khushi is proud.`
+
 ];
 
-function runDiagnostic(){
-  document.getElementById("diagnosticOutput").innerText =
-    diagnostics[Math.floor(Math.random()*diagnostics.length)];
+function runDiagnostic() {
+
+  document
+    .getElementById(
+      "diagnosticOutput"
+    )
+    .innerText =
+      diagnostics[
+        Math.floor(
+          Math.random() *
+          diagnostics.length
+        )
+      ];
 }
 
-const locate = [
-"Pretending to work",
-"Thinking about Aman",
-"Wondering if Aman has eaten",
-"Checking countdown again",
-"Looking forward to Thursday",
-"Missing Aman",
-"Smiling at old memories"
+// ======================
+// LOCATE KHUSHI
+// ======================
+
+const locateMessages = [
+
+  "Pretending to work",
+
+  "Thinking about Aman",
+
+  "Wondering if Aman has eaten",
+
+  "Checking the countdown again",
+
+  "Looking forward to Thursday",
+
+  "Missing Aman",
+
+  "Smiling at old memories",
+
+  "Looking at photos",
+
+  "Sending imaginary hugs",
+
+  "Wondering what Aman is doing",
+
+  "Definitely not concentrating"
 ];
 
-function locateKhushi(){
-  document.getElementById("locateOutput").innerText =
-    "Khushi located.\n\nCurrent activity:\n\n" +
-    locate[Math.floor(Math.random()*locate.length)];
+function locateKhushi() {
+
+  document
+    .getElementById("locateOutput")
+    .innerText =
+
+`KHUSHI LOCATED
+
+Current Activity:
+
+${
+locateMessages[
+Math.floor(
+Math.random() *
+locateMessages.length
+)
+]
+}`;
 }
 
-function showOrbitStatus(){
+// ======================
+// ORBIT STATUS
+// ======================
 
-  document.getElementById("orbitOutput").innerText =
-`Distance: Too Much
+function showOrbitStatus() {
 
-Patience: Decreasing
+  const diff =
+    reunionDate - new Date();
 
-Love: Ridiculous
+  const hours =
+    diff / (1000 * 60 * 60);
 
-Reunion Probability: 100%`;
+  let distance;
+
+  if (hours < 6) {
+    distance =
+      "Almost Resolved";
+  }
+
+  else if (hours < 24) {
+    distance =
+      "Shrinking";
+  }
+
+  else {
+    distance =
+      "Too Much";
+  }
+
+  document
+    .getElementById("orbitOutput")
+    .innerText =
+
+`ORBIT REPORT
+
+Distance:
+${distance}
+
+Patience:
+Decreasing
+
+Love:
+Ridiculous
+
+Reunion Probability:
+100%
+
+System Status:
+Stable`;
 }
+
+// ======================
+// TRANSMISSIONS
+// ======================
 
 const transmissions = [
-"hey",
+
+"hey aman",
+
+"orbit check-in:\nstill thinking about you",
+
 "i know you're busy",
-"and doing important things",
-"but i'm thinking about you",
-"i miss you",
+
+"and taking care of everyone",
+
+"thank you for being that kind of person",
+
 "i'm really proud of you",
-"thank you for showing up for the people you love",
-"can't wait to see you thursday",
+
+"the distance is temporary",
+
+"the missing you part is not",
+
+"see you thursday ❤️",
+
 "love,\nKhushi"
 ];
 
 let transmissionIndex =
-parseInt(localStorage.getItem("orbitTransmission")) || 0;
+parseInt(
+localStorage.getItem(
+"orbitTransmission"
+)
+) || 0;
 
-function nextTransmission(){
+function nextTransmission() {
 
-  if(transmissionIndex >= transmissions.length){
-    transmissionIndex = transmissions.length - 1;
+  if (
+    transmissionIndex >=
+    transmissions.length
+  ) {
+
+    document
+      .getElementById(
+        "transmissionOutput"
+      )
+      .innerText =
+
+`END OF TRANSMISSION
+
+Message archive complete.
+
+Love,
+Khushi`;
+
+    return;
   }
 
-  document.getElementById("transmissionOutput").innerText =
-    transmissions[transmissionIndex];
+  document
+    .getElementById(
+      "transmissionOutput"
+    )
+    .innerText =
+      transmissions[
+        transmissionIndex
+      ];
 
   transmissionIndex++;
 
@@ -181,3 +465,4 @@ function nextTransmission(){
     transmissionIndex
   );
 }
+```
