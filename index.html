@@ -1,248 +1,298 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Project Orbit</title>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover">
 
   <meta name="theme-color" content="#07111f">
+
+  <title>Project Orbit</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div id="stars"></div>
+  <div id="stars"></div>
 
-<div class="app">
+  <div class="app">
 
-  <!-- HOME -->
+    <!-- HOME -->
 
-  <section id="home" class="view active">
+    <section id="home" class="view active">
 
-    <header class="hero">
+      <header class="hero">
 
-      <div class="system-tag">
-        ORBITAL MONITORING SYSTEM
+        <div class="system-tag">
+          ORBITAL MONITORING SYSTEM
+        </div>
+
+        <h1>PROJECT ORBIT</h1>
+
+        <p class="subtitle">
+          Monitoring long-distance planetary conditions...
+        </p>
+
+      </header>
+
+      <!-- ORBIT -->
+
+      <div class="orbit-container">
+
+        <div id="popup"></div>
+
+        <div
+          class="planet"
+          id="amanPlanet"
+          role="button"
+          tabindex="0"
+          aria-label="Aman Planet">
+
+          <span class="planet-name">
+            Aman
+          </span>
+
+        </div>
+
+        <div class="orbit-ring">
+
+          <div
+            class="moon"
+            id="khushiMoon"
+            role="button"
+            tabindex="0"
+            aria-label="Khushi Moon">
+
+            <span class="moon-name">
+              Khushi
+            </span>
+
+          </div>
+
+        </div>
+
       </div>
 
-      <h1>PROJECT ORBIT</h1>
+      <!-- COUNTDOWN -->
 
-      <p class="subtitle">
-        Monitoring long-distance planetary conditions...
+      <div class="status-card countdown-card">
+
+        <div class="card-label">
+          ESTIMATED TIME UNTIL AMAN RECOVERY
+        </div>
+
+        <div id="countdown" class="countdown">
+          Loading...
+        </div>
+
+        <div id="countdownSubtext" class="subtext">
+          Butterfly patience remaining...
+        </div>
+
+      </div>
+
+      <!-- STATUS -->
+
+      <div class="status-card">
+
+        <div class="status-grid">
+
+          <div class="status-item">
+            <span>Subject</span>
+            <strong>Aman</strong>
+          </div>
+
+          <div class="status-item">
+            <span>Status</span>
+            <strong>Away</strong>
+          </div>
+
+          <div class="status-item">
+            <span>Observer</span>
+            <strong>Khushi</strong>
+          </div>
+
+          <div class="status-item">
+            <span>Orbit</span>
+            <strong>Stable</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- MENU -->
+
+      <div class="menu">
+
+        <button
+          type="button"
+          class="menu-btn"
+          onclick="openView('diagnostics')">
+          Diagnostics
+        </button>
+
+        <button
+          type="button"
+          class="menu-btn"
+          onclick="openView('locate')">
+          Locate Khushi
+        </button>
+
+        <button
+          type="button"
+          class="menu-btn"
+          onclick="openView('orbitStatus')">
+          Orbit Status
+        </button>
+
+        <button
+          type="button"
+          class="menu-btn"
+          onclick="openView('transmissions')">
+          Transmissions
+        </button>
+
+      </div>
+
+      <footer class="footer-note">
+        Orbit stable • Reunion pending
+      </footer>
+
+    </section>
+
+    <!-- DIAGNOSTICS -->
+
+    <section id="diagnostics" class="view panel">
+
+      <button
+        type="button"
+        class="back-button"
+        onclick="goHome()">
+        ← Control Panel
+      </button>
+
+      <h2>Diagnostics</h2>
+
+      <p class="panel-subtitle">
+        Run a full system scan on Aman.
       </p>
 
-    </header>
-
-    <!-- ORBIT -->
-
-    <div class="orbit-container">
-
-      <div id="popup"></div>
-
-      <div class="planet" id="amanPlanet">
-        <span class="planet-name">Aman</span>
-      </div>
-
-      <div class="orbit-ring">
-
-        <div class="moon" id="khushiMoon">
-          <span class="moon-name">Khushi</span>
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- COUNTDOWN -->
-
-    <div class="status-card countdown-card">
-
-      <div class="card-label">
-        ESTIMATED TIME UNTIL AMAN RECOVERY
-      </div>
-
-      <div id="countdown" class="countdown">
-        Loading...
-      </div>
-
-      <div id="countdownSubtext" class="subtext">
-        Butterfly patience remaining...
-      </div>
-
-    </div>
-
-    <!-- STATUS -->
-
-    <div class="status-card">
-
-      <div class="status-grid">
-
-        <div class="status-item">
-          <span>Subject</span>
-          <strong>Aman</strong>
-        </div>
-
-        <div class="status-item">
-          <span>Status</span>
-          <strong>Away</strong>
-        </div>
-
-        <div class="status-item">
-          <span>Observer</span>
-          <strong>Khushi</strong>
-        </div>
-
-        <div class="status-item">
-          <span>Orbit</span>
-          <strong>Stable</strong>
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- MENU -->
-
-    <div class="menu">
-
-      <button class="menu-btn"
-        onclick="openView('diagnostics')">
-        Diagnostics
+      <button
+        type="button"
+        class="action-button"
+        onclick="runDiagnostic()">
+        Run Diagnostic
       </button>
 
-      <button class="menu-btn"
-        onclick="openView('locate')">
-        Locate Khushi
+      <div
+        class="output"
+        id="diagnosticOutput">
+      </div>
+
+    </section>
+
+    <!-- LOCATE -->
+
+    <section id="locate" class="view panel">
+
+      <button
+        type="button"
+        class="back-button"
+        onclick="goHome()">
+        ← Control Panel
       </button>
 
-      <button class="menu-btn"
-        onclick="openView('orbitStatus')">
-        Orbit Status
+      <h2>Locate Khushi</h2>
+
+      <p class="panel-subtitle">
+        Attempting observer location...
+      </p>
+
+      <button
+        type="button"
+        class="action-button"
+        onclick="locateKhushi()">
+        Locate
       </button>
 
-      <button class="menu-btn"
-        onclick="openView('transmissions')">
-        Transmissions
+      <div
+        class="output"
+        id="locateOutput">
+      </div>
+
+    </section>
+
+    <!-- ORBIT STATUS -->
+
+    <section id="orbitStatus" class="view panel">
+
+      <button
+        type="button"
+        class="back-button"
+        onclick="goHome()">
+        ← Control Panel
       </button>
 
-    </div>
+      <h2>Orbit Status</h2>
 
-    <footer class="footer-note">
-      Orbit stable • Reunion pending
-    </footer>
+      <p class="panel-subtitle">
+        Generate latest orbital report.
+      </p>
 
-  </section>
+      <button
+        type="button"
+        class="action-button"
+        onclick="showOrbitStatus()">
+        Generate Report
+      </button>
 
-  <!-- DIAGNOSTICS -->
+      <div
+        class="output"
+        id="orbitOutput">
+      </div>
 
-  <section id="diagnostics" class="view panel">
+    </section>
 
-    <button class="back-button"
-      onclick="goHome()">
-      ← Control Panel
-    </button>
+    <!-- TRANSMISSIONS -->
 
-    <h2>Diagnostics</h2>
+    <section id="transmissions" class="view panel">
 
-    <p class="panel-subtitle">
-      Run a full system scan on Aman.
-    </p>
+      <button
+        type="button"
+        class="back-button"
+        onclick="goHome()">
+        ← Control Panel
+      </button>
 
-    <button class="action-button"
-      onclick="runDiagnostic()">
-      Run Diagnostic
-    </button>
+      <h2>Transmissions</h2>
 
-    <div class="output"
-      id="diagnosticOutput">
-    </div>
+      <p class="panel-subtitle">
+        Receiving incoming messages...
+      </p>
 
-  </section>
+      <button
+        type="button"
+        class="action-button"
+        onclick="nextTransmission()">
+        Receive Transmission
+      </button>
 
-  <!-- LOCATE -->
+      <div
+        class="output"
+        id="transmissionOutput">
+      </div>
 
-  <section id="locate" class="view panel">
+    </section>
 
-    <button class="back-button"
-      onclick="goHome()">
-      ← Control Panel
-    </button>
+  </div>
 
-    <h2>Locate Khushi</h2>
-
-    <p class="panel-subtitle">
-      Attempting observer location...
-    </p>
-
-    <button class="action-button"
-      onclick="locateKhushi()">
-      Locate
-    </button>
-
-    <div class="output"
-      id="locateOutput">
-    </div>
-
-  </section>
-
-  <!-- ORBIT STATUS -->
-
-  <section id="orbitStatus" class="view panel">
-
-    <button class="back-button"
-      onclick="goHome()">
-      ← Control Panel
-    </button>
-
-    <h2>Orbit Status</h2>
-
-    <p class="panel-subtitle">
-      Generate latest orbital report.
-    </p>
-
-    <button class="action-button"
-      onclick="showOrbitStatus()">
-      Generate Report
-    </button>
-
-    <div class="output"
-      id="orbitOutput">
-    </div>
-
-  </section>
-
-  <!-- TRANSMISSIONS -->
-
-  <section id="transmissions" class="view panel">
-
-    <button class="back-button"
-      onclick="goHome()">
-      ← Control Panel
-    </button>
-
-    <h2>Transmissions</h2>
-
-    <p class="panel-subtitle">
-      Receiving incoming messages...
-    </p>
-
-    <button class="action-button"
-      onclick="nextTransmission()">
-      Receive Transmission
-    </button>
-
-    <div class="output"
-      id="transmissionOutput">
-    </div>
-
-  </section>
-
-</div>
-
-<script src="script.js"></script>
+  <!-- defer prevents mobile timing issues -->
+  <script defer src="script.js"></script>
 
 </body>
 </html>
-```
