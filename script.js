@@ -8,7 +8,7 @@ const reunionDate = new Date(
   2026,
   5,
   18,
-  14,
+  12,
   0,
   0
 );
